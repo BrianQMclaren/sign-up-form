@@ -7,7 +7,6 @@ const MongoStore = require('connect-mongo')(session);
 const assert = require('assert');
 const app = express();
 
-
 //mongoose connection
 mongoose.connect('mongodb://localhost:27017/sign-up-form');
 const db = mongoose.connection;
@@ -16,19 +15,21 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 //use sessions for tracking logins
-app.use(session({
-  secret: 'mommy loves you',
-  resave: true,
-  saveUninitialized: false,
-  store: new MongoStore({
-    mongooseConnection: db
-  })
-}));
+app.use(
+	session({
+		secret: 'mommy loves you',
+		resave: true,
+		saveUninitialized: false,
+		store: new MongoStore({
+			mongooseConnection: db
+		})
+	})
+);
 
 //make user ID available to templates
 app.use(function(req, res, next) {
-  res.locals.currentUser = req.session.userId;
-  next();
+	res.locals.currentUser = req.session.userId;
+	next();
 });
 
 //parse incoming requests
@@ -48,21 +49,21 @@ app.use('/', routes);
 
 //catch 404 and foward to handler
 app.use((req, res, next) => {
-  const err = new Error('File Not Found');
-  err.status = 404;
-  next(err);
+	const err = new Error('File Not Found');
+	err.status = 404;
+	next(err);
 });
 
 //error handler
 // define as the last app.js callback
 app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+	res.status(err.status || 500);
+	res.render('error', {
+		message: err.message,
+		error: {}
+	});
 });
 
 app.listen(3000, () => {
-  console.log('Your app is running on localhost:3000!');
-})
+	console.log('Your app is running on localhost:3000!');
+});
