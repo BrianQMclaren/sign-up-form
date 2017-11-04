@@ -1,4 +1,4 @@
-require("./utils");
+const utils = require("npm-utils");
 
 const express = require('express');
 const http = require('http');
