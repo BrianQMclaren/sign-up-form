@@ -2,14 +2,30 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
+const mongodb = require('mongodb');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const assert = require('assert');
 const app = express();
 
+
+// Connect to heroku server
+var uri = 'mongodb://heroku_fqv9hg2h:ljpbfjlvl10670dslq6qifok6q@ds147265.mlab.com:47265/heroku_fqv9hg2h';
+
+mongodb.MongoClient.connect(uri, function(err, db) {
+  if (err)  {
+    throw err;
+  } else {
+    db.close(function(err){
+      if(err) throw err;
+    })
+  }
+})
+
+
 //mongoose connection
-mongoose.connect('mongodb://localhost:authentication-form.herokuapp');
-mongoose.connect('mongodb://localhost:27017/sign-up-form');
+var mongoURI = 'mongodb://localhost:27017/sign-up-form';
+mongoose.connect(uri || mongoURI);
 const db = mongoose.connection;
 
 //mongo error

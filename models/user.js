@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
-const mongodb = require('mongodb');
+
 
 // Use native promises
 mongoose.Promise = global.Promise;
@@ -22,17 +22,6 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
-var uri = 'mongodb://heroku_fqv9hg2h:ljpbfjlvl10670dslq6qifok6q@ds147265.mlab.com:47265/heroku_fqv9hg2h';
-
-mongodb.MongoClient.connect(uri, function(err, db) {
-  if (err)  {
-    throw err;
-  } else {
-    db.close(function(err){
-      if(err) throw err;
-    })
-  }
-})
 
 //authenticate input against database documents
 UserSchema.statics.authenticate = function(email, password, callback) {
