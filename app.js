@@ -1,4 +1,4 @@
-const utils = require("../utils");
+const utils = require("utils");
 
 const express = require('express');
 const http = require('http');
@@ -84,7 +84,11 @@ app.use((err, req, res, next) => {
 	});
 });
 
-
+http.createServer((req, res) => {
+  res.statusCode =  200;
+  res.setHeader('Content-type', 'text/plain');
+  res.end();
+});
 
 app.listen(port, () => {
 	console.log(`listening on ${port}`);
