@@ -50,7 +50,7 @@ UserSchema.pre('save', function(next) {
   var user = this;
 
 bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(user.password, salt, function(err, hash) {
+    bcrypt.hash(user.password, salt, null, function(err, hash) {
         // Store hash in your password DB.
         if (err) {
           return next(err);
