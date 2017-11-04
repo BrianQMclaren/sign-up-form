@@ -84,11 +84,7 @@ app.use((err, req, res, next) => {
 	});
 });
 
-http.createServer((req, res) => {
-  res.statusCode =  200;
-  res.setHeader('Content-type', 'text/plain');
-  res.end();
-});
+
 
 app.listen(port, () => {
 	console.log(`listening on ${port}`);
