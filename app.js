@@ -8,7 +8,7 @@ const assert = require('assert');
 const app = express();
 
 //mongoose connection
-mongoose.connect('mongodb://localhost:27017/sign-up-form');
+mongoose.connect('mongodb://https://authentication-form.herokuapp.com/sign-up-form');
 const db = mongoose.connection;
 
 //mongo error
